@@ -1,5 +1,4 @@
-import { useContext, useRef, useState } from "react";
-//import { UserContext, UserType } from "./userReducer";
+import { useContext, useState } from "react";
 import TextField from "@mui/material/TextField/TextField";
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
@@ -8,6 +7,7 @@ import { UserContext } from "./userReducer";
 const Form = ({ handleSubmit }: { handleSubmit: Function }) => {
     const { user, userDispatch } = useContext(UserContext);
     const [formData, setFormData] = useState({
+        id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
@@ -34,54 +34,81 @@ const Form = ({ handleSubmit }: { handleSubmit: Function }) => {
                 flexDirection: 'column', 
                 alignItems: 'center', 
                 justifyContent: 'center', 
-                height: '100vh', // גובה מלא של חלון 
-                '& > :not(style)': { m: 1, width: '25ch' } }}
+                height: '80vh', // Full height of the window
+                width: '30vw', // Width of the form
+                backgroundColor: 'white', // Solid background color
+                zIndex: 1000, // Ensure it overlays other content
+                pointerEvents: 'auto', // Allows interaction with the form
+                '& > :not(style)': { m: 1, width: '25ch' }
+            }}
             noValidate
             autoComplete="off"
             onSubmit={(e) => { handleSubmit(e, formData); }}
         >
-            <TextField id="filled-basic1" label="first name" variant="filled"
+            <TextField 
+                id="filled-basic1" 
+                label="First Name" 
+                variant="filled"
                 type='text'
                 name='firstName'
                 value={formData.firstName}
                 onChange={handleChange}
             />
-            <TextField id="filled-basic2" label="last name" variant="filled"
+            <TextField 
+                id="filled-basic2" 
+                label="Last Name" 
+                variant="filled"
                 type='text'
                 name='lastName'
                 value={formData.lastName}
                 onChange={handleChange}
             />
-            <TextField id="filled-basic3" label="email" variant="filled"
+            <TextField 
+                id="filled-basic3" 
+                label="Email" 
+                variant="filled"
                 type='text'
                 name='email'
                 value={formData.email}
                 onChange={handleChange}
             />
-            <TextField id="filled-basic4" label="password" variant="filled"
+            <TextField 
+                id="filled-basic4" 
+                label="Password" 
+                variant="filled"
                 type='password'
                 name='password'
                 value={formData.password}
                 onChange={handleChange}
             />
-            <TextField id="filled-basic5" label="address" variant="filled"
+            <TextField 
+                id="filled-basic5" 
+                label="Address" 
+                variant="filled"
                 type='text'
                 name='address'
                 value={formData.address}
                 onChange={handleChange}
             />
-            <TextField id="filled-basic6" label="tel" variant="filled"
+            <TextField 
+                id="filled-basic6" 
+                label="Tel" 
+                variant="filled"
                 type='text'
                 name='tel'
                 value={formData.tel}
                 onChange={handleChange}
             />
-            <Button sx={{color: 'black'}} variant="outlined"
+            <Button 
+                sx={{ color: 'black' }} 
+                variant="outlined"
                 type="submit"
                 startIcon={<DoneOutlineIcon />}
-                color="inherit">Save
+                color="inherit"
+            >
+                Save
             </Button>
-            {/* <Button type="submit">edit</Button> */}
+            {/* <Button type="submit">Edit</Button> */}
         </Box>
     </>)
 }
